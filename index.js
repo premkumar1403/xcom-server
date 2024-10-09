@@ -66,9 +66,9 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Twiller is working");
+  res.send("xcom is working");
 });
 
 app.listen(port, () => {
-  console.log(`Twiller clone is workingon ${port}`);
+  console.log(`xcom clone is workingon ${port}`);
 });
