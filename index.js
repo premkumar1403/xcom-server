@@ -1,13 +1,13 @@
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const express = require("express");
 const cors = require("cors");
-const uri = "mongodb+srv://premkumar:Prem1618513*@cluster0.mtheh.mongodb.net/twitter?retryWrites=true&w=majority&appName=Cluster0";
 const port = 5000;
-
+const dotenv = require("dotenv")
+dotenv.config()
 const app = express();
 app.use(cors());
 app.use(express.json());
-
+const uri = process.env.DB_URL;
 const client = new MongoClient(uri);
 
 async function run() {
