@@ -9,8 +9,5 @@
     "routes":[{
         "src":"/(.*)",
         "dest":"index.js"
-    }],
-     "firebase.js": [{
-    "apiKey": "AIzaSyCRo1C1nholrDN-U6SXx8nkSwi-3eQ4DRA"
-  }]
+    }]
 }
