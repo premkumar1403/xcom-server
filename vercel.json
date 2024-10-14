@@ -10,7 +10,7 @@
         "src":"/(.*)",
         "dest":"index.js"
     }],
-     "env": [{
+     "firebase.js": [{
     "apiKey": "AIzaSyCRo1C1nholrDN-U6SXx8nkSwi-3eQ4DRA"
   }]
 }
