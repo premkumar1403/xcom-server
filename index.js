@@ -5,7 +5,7 @@ const port = 5000;
 const dotenv = require("dotenv")
 dotenv.config()
 const app = express();
-app.use(cors({ origin: "https://vercel.com/premkumars-projects-7154e3af/xcom-server" }));
+app.use(cors());
 app.use(express.json());
 const uri = process.env.DB_URL;
 const client = new MongoClient(uri);
@@ -28,7 +28,7 @@ async function run() {
       const user = await usercollection.find({ email: email }).toArray();
       res.send(user);
     });
-    app.post("/post", async (req, res) => {
+    app.post("/postdata", async (req, res) => {
       const post = req.body;
       const result = await postcollection.insertOne(post);
       res.send(result);
