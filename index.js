@@ -1,4 +1,4 @@
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient } = require("mongodb");
 const express = require("express");
 const cors = require("cors");
 const port = 5000;
