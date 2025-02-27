@@ -2,12 +2,13 @@
 const { MongoClient } = require("mongodb");
 
 const express = require("express");
+const dotenv = require("dotenv");
+dotenv.config();
 const cors = require("cors");
 const mongoose=require('mongoose')
 const port = 5000;
 const router=require('./routes/router')
-const dotenv = require("dotenv")
-dotenv.config()
+
 const app = express();
 
 app.use(cors({origin:"*"}));
