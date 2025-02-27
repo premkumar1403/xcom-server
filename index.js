@@ -1,70 +1,28 @@
-const { MongoClient, ServerApiVersion } = require("mongodb");
+
 const express = require("express");
 const cors = require("cors");
+const mongoose=require('mongoose')
 const port = 5000;
+const router=require('./routes/router')
 const dotenv = require("dotenv")
 dotenv.config()
 const app = express();
-app.use(cors({ origin: "https://vercel.com/premkumars-projects-7154e3af/xcom-server" }));
+app.use(cors({origin:"*"}));
 app.use(express.json());
 const uri = process.env.DB_URL;
-const client = new MongoClient(uri);
+mongoose.connect(uri)
+  .then(() => {
+  console.log("database connected successfully");
+  
+  })
+  .catch((e) => {
+  console.log("error connecting databse:",e);
+  
+})
 
-async function run() {
-  try {
-    await client.connect();
-    console.log("db connected");
-    
-    const postcollection = client.db("database").collection("posts");
-    const usercollection = client.db("database").collection("users");
-    app.post("/register", async (req, res) => {
-      const user = req.body;
-      // console.log(user)
-      const result = await usercollection.insertOne(user);
-      res.send(result);
-    });
-    app.get("/loggedinuser", async (req, res) => {
-      const email = req.query.email;
-      const user = await usercollection.find({ email: email }).toArray();
-      res.send(user);
-    });
-    app.post("/post", async (req, res) => {
-      const post = req.body;
-      const result = await postcollection.insertOne(post);
-      res.send(result);
-    });
-    app.get("/post", async (req, res) => {
-      const post = (await postcollection.find().toArray()).reverse();
-      res.send(post);
-    });
-    app.get("/userpost", async (req, res) => {
-      const email = req.query.email;
-      const post = (
-        await postcollection.find({ email: email }).toArray()
-      ).reverse();
-      res.send(post);
-    });
-
-    app.get("/user", async (req, res) => {
-      const user = await usercollection.find().toArray();
-      res.send(user);
-    });
-
-    app.patch("/userupdate/:email", async (req, res) => {
-      const filter = req.params;
-      const profile = req.body;
-      const options = { upsert: true };
-      const updateDoc = { $set: profile };
-      // console.log(profile)
-      const result = await usercollection.updateOne(filter, updateDoc, options);
-      res.send(result);
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
-run().catch(console.dir);
-
+  
+  
+app.use("/api/v1", router);
 app.get("/", (req, res) => {
   res.send("xcom is working");
 });
