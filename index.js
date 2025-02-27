@@ -1,4 +1,6 @@
 
+const { MongoClient } = require("mongodb");
+
 const express = require("express");
 const cors = require("cors");
 const mongoose=require('mongoose')
@@ -7,7 +9,11 @@ const router=require('./routes/router')
 const dotenv = require("dotenv")
 dotenv.config()
 const app = express();
+
 app.use(cors({origin:"*"}));
+
+app.use(cors());
+
 app.use(express.json());
 const uri = process.env.DB_URL;
 mongoose.connect(uri)
